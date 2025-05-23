@@ -1,0 +1,87 @@
+<!-- index.html  ·  Overview page for “oshasight” -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>oshasight · Overview</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ───────── NAVBAR ───────── -->
+  <header class="top-bar">
+    <div class="project-name"><a href="./">oshasight</a></div>
+    <nav>
+      <ul>
+        <li><a href="./"                    class="nav-link active">Overview</a></li>
+        <li><a href="./presentation/"       class="nav-link">Presentation</a></li>
+        <li><a href="./setup/"              class="nav-link">Setup&nbsp;/&nbsp;Installation</a></li>
+        <li><a href="./report/"             class="nav-link">Report</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ───────── MAIN CONTENT ───────── -->
+  <main class="content">
+    <!-- HERO -->
+    <section id="hero" class="top-header">
+      <h1>oshasight</h1>
+      <p>
+        A lightweight computer-vision service that spots missing PPE and unsafe
+        actions in real time — <em>before</em> OSHA does.
+      </p>
+      <a href="./presentation/" class="download-btn">View Live Demo Slides</a>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <h2>Key Features</h2>
+      <ul>
+        <li>&lt; 50 ms latency, multi-camera support</li>
+        <li>Hard-hat, mask, goggles, vest, gloves, smoke detection</li>
+        <li>Edge-ready — GTX 1660 Ti or Jetson Orin Nano</li>
+        <li>Signed violation log for effortless OSHA audits</li>
+        <li>REST + WebSocket API for easy plant-floor integration</li>
+      </ul>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About the Project</h2>
+      <p>
+        oshasight is an open-source capstone for the Sapienza course
+        <strong>“Computer Vision and NLP.”</strong>  
+        We distilled YOLOv8, merged six detectors, and tuned a rule engine to
+        convert raw frames into actionable safety alerts.
+      </p>
+      <p>
+        The model reaches <strong>0.91 mAP@0.5</strong> while pushing
+        <strong>100 FPS</strong> on commodity GPUs — or 31 FPS on Jetson
+        Orin Nano at just 4.7 W.
+      </p>
+      <figure>
+        <img src="pipeline.png" alt="End-to-end pipeline diagram">
+        <figcaption>Capture → detector → rule engine → log / alert.</figcaption>
+      </figure>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team">
+      <h2>Meet the Team</h2>
+      <div class="team-grid">
+        <figure>
+          <img src="akainu.jpg" alt="Lorenzo Porcelli">
+          <figcaption>Lorenzo Porcelli<br><small>Lead Data Scientist</small></figcaption>
+        </figure>
+        <figure>
+          <img src="akainu.jpg" alt="Gökhan Ceylan">
+          <figcaption>Gökhan Ceylan<br><small>Computer Vision Engineer</small></figcaption>
+        </figure>
+        <!-- add more members if needed -->
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
