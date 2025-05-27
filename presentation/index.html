@@ -1,14 +1,17 @@
-<!-- /presentation/index.html  ·  Demo deck for “oshasight” -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>oshasight · Presentation</title>
+
+  <!-- global look-&-feel -->
   <link rel="stylesheet" href="../style.css">
+  <!-- local slideshow tweaks -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- NAVBAR -->
+  <!-- ───── NAVBAR (unchanged) ───── -->
   <header class="top-bar">
     <div class="project-name"><a href="../">oshasight</a></div>
     <nav>
@@ -22,149 +25,71 @@
   </header>
 
   <main class="content">
-    <!-- 1 ▸ Cover -->
-    <section id="cover" class="section hero-section">
-      <h1>oshasight</h1>
-      <p class="subtitle">“If a webcam can see it, we can keep it safe.”</p>
-      <p>Six-month sprint from ⭐ idea to 🚀 demo — buckle up!</p>
-    </section>
+    <!-- ───── SLIDESHOW ───── -->
+    <section id="slideshow" class="section">
+      <div class="slideshow-container">
+        <!-- 20 slides -->
+        <!-- You may replace the src paths with your actual images -->
+        <img src="1.png"  alt="Slide 1"  class="slide showing">
+        <img src="2.png"  alt="Slide 2"  class="slide">
+        <img src="3.png"  alt="Slide 3"  class="slide">
+        <img src="4.png"  alt="Slide 4"  class="slide">
+        <img src="5.png"  alt="Slide 5"  class="slide">
+        <img src="6.png"  alt="Slide 6"  class="slide">
+        <img src="7.png"  alt="Slide 7"  class="slide">
+        <img src="8.png"  alt="Slide 8"  class="slide">
+        <img src="9.png"  alt="Slide 9"  class="slide">
+        <img src="10.png" alt="Slide 10" class="slide">
+        <img src="11.png" alt="Slide 11" class="slide">
+        <img src="12.png" alt="Slide 12" class="slide">
+        <img src="13.png" alt="Slide 13" class="slide">
+        <img src="14.png" alt="Slide 14" class="slide">
+        <img src="15.png" alt="Slide 15" class="slide">
+        <img src="16.png" alt="Slide 16" class="slide">
+        <img src="17.png" alt="Slide 17" class="slide">
+        <img src="18.png" alt="Slide 18" class="slide">
+        <img src="19.png" alt="Slide 19" class="slide">
+        <img src="20.png" alt="Slide 20" class="slide">
 
-    <!-- 2 ▸ Agenda -->
-    <section id="agenda" class="section">
-      <h2>Agenda</h2>
-      <ol class="agenda-list">
-        <li>Origin story — why bother?</li>
-        <li>Timeline &amp; pivots</li>
-        <li>Data&nbsp;&amp;&nbsp;datasets</li>
-        <li>Models @ a glance</li>
-        <li>Results &amp; live demo</li>
-        <li>What we learned</li>
-        <li>How it can be improved</li>
-      </ol>
-    </section>
-
-    <!-- 3 ▸ Origin -->
-    <section id="origin" class="section">
-      <h2>How It Started</h2>
-      <p>
-        January 2025. Factory tour. Supervisor mutters:
-        <em>“Wish those cameras told me who’s missing hard-hats.”</em>
-        <br>Challenge accepted.
-      </p>
-      <ul>
-        <li>Week 1 → Roboflow PoC — 37 % mAP (<span style="color:#c44;">ouch</span>).</li>
-        <li>Week 3 → first on-site test — posters triggered false detections 🤦‍♂️.</li>
-        <li>Pivot → collect &amp; label our own footage + crank up synthetic augments.</li>
-      </ul>
-    </section>
-
-    <!-- 4 ▸ Timeline -->
-    <section id="timeline" class="section">
-      <h2>Journey in Milestones</h2>
-      <ol>
-        <li><strong>Feb 10:</strong> PoC to advisors → green-light.</li>
-        <li><strong>Mar 01:</strong> 18 k frames recorded across 3 partner sites.</li>
-        <li><strong>Mar 20:</strong> Unity synthetic pipeline → +120 k PPE images.</li>
-        <li><strong>Apr 08:</strong> Switched YOLOv5-s → YOLOv8-s (↑ 2.4 mAP).</li>
-        <li><strong>Apr 25:</strong> Distilled &amp; pruned (−40 % params, same accuracy).</li>
-        <li><strong>May 12:</strong> Jetson Orin Nano demo @ 31 FPS.</li>
-      </ol>
-    </section>
-
-    <!-- 5 ▸ Data -->
-    <section id="data" class="section">
-      <h2>Data, Data, Data</h2>
-
-      <h3>Public sources (clickable)</h3>
-      <ul class="link-list">
-        <li><a href="https://universe.roboflow.com/noriel-vlmtq/glassesdetection-lwja6/dataset/2" target="_blank">GlassesDetection v2</a></li>
-        <li><a href="https://universe.roboflow.com/sametataysamet/kask-tanima/dataset/3" target="_blank">Kask Tanıma v3 (Hard-hats)</a></li>
-        <li><a href="https://www.kaggle.com/datasets/andrewmvd/face-mask-detection" target="_blank">Face-Mask-Detection (Kaggle)</a></li>
-        <li><a href="https://universe.roboflow.com/manoj-mava/moye-moye" target="_blank">Moye Moye PPE mix</a></li>
-        <li><a href="https://universe.roboflow.com/tello-8ckdt/hazard-vest/dataset/3" target="_blank">Hazard-Vest v3</a></li>
-      </ul>
-
-      <p>
-        Plus <strong>18 k</strong> factory frames (NDA) + <strong>120 k</strong>
-        Unity renders (CC BY 4.0). All datasets auto-converted to YOLO format.
-      </p>
-
-      <h3>Final split</h3>
-      <table class="data-table">
-        <thead><tr><th>Split</th><th>Images</th><th>PPE objects</th></tr></thead>
-        <tbody>
-          <tr><td>Train</td><td>96 428</td><td>327 891</td></tr>
-          <tr><td>Val</td>  <td>12 000</td><td>41 127</td></tr>
-          <tr><td>Test</td> <td>8 500</td><td>28 560</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- 6 ▸ Models @ a Glance -->
-    <section id="models" class="section">
-      <h2>Models @ a Glance</h2>
-      <table class="data-table">
-        <thead><tr><th>PPE Class</th><th>Base Net</th><th>Dataset&nbsp;Blend</th><th>mAP@0.5</th></tr></thead>
-        <tbody>
-          <tr><td>Hard-hat</td> <td>YOLOv8-s</td><td>Kask Tanıma v3 + internal</td><td>0.94</td></tr>
-          <tr><td>Mask</td>     <td>YOLOv8-s</td><td>Face-Mask + internal</td><td>0.93</td></tr>
-          <tr><td>Goggles</td>  <td>YOLOv8-n</td><td>GlassesDetection v2</td><td>0.91</td></tr>
-          <tr><td>Vest</td>     <td>YOLOv8-s</td><td>Hazard-Vest v3 + synth</td><td>0.92</td></tr>
-          <tr><td>Gloves</td>    <td>YOLOv8-n</td><td>Roboflow gloves subset</td><td>0.87</td></tr>
-          <tr><td>Smoke</td>    <td>YOLOv8-s</td><td>1 100 custom frames</td><td>0.89</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- 7 ▸ Results -->
-    <section id="results" class="section">
-      <h2>Evaluation Snapshot</h2>
-      <table class="data-table">
-        <thead><tr><th>Composite detector</th><th>mAP@0.5</th><th>FPS (1660 Ti)</th><th>Params</th></tr></thead>
-        <tbody>
-          <tr><td>YOLOv8-s (pruned)</td><td>0.913</td><td>101</td><td>11.2 M</td></tr>
-          <tr><td>YOLOv5-s (baseline)</td><td>0.899</td><td>92</td><td>7.5 M</td></tr>
-          <tr><td>Faster-RCNN R-50</td><td>0.862</td><td>25</td><td>41 M</td></tr>
-        </tbody>
-      </table>
-      <p class="note">Thresholds – conf 0.25 · IoU 0.5</p>
-    </section>
-
-    <!-- 8 ▸ Demo -->
-    <section id="demo" class="section">
-      <h2>Live Demo 🎥</h2>
-      <p>30-sec clip on Jetson Orin Nano (31 FPS):</p>
-      <div class="video-wrapper">
-        <video controls poster="../assets/poster.jpg" width="100%">
-          <source src="../assets/demo.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <!-- navigation arrows -->
+        <button class="nav-btn prev" aria-label="Previous slide">&#10094;</button>
+        <button class="nav-btn next" aria-label="Next slide">&#10095;</button>
       </div>
-    </section>
 
-    <!-- 9 ▸ Learned -->
-    <section id="learned" class="section">
-      <h2>What We Learned 🙌</h2>
-      <ul>
-        <li>🎨 Lighting beats algorithms → heavy domain randomisation.</li>
-        <li>📝 Annotation fatigue is real → cap at 200 imgs/day + QA panel.</li>
-        <li>🚀 Edge &gt; cloud for latency (−180 ms).</li>
-        <li>🧪 Synthetic vest colours ↑ recall +5 pp.</li>
-      </ul>
-    </section>
-
-    <!-- 10 ▸ Improvements -->
-    <section id="improve" class="section footer-section">
-      <h2>How It Can Be Improved 🔭</h2>
-      <ol>
-        <li>Multi-camera fusion (ID tracking across views).</li>
-        <li>Pose-based unsafe actions (bending, climbing, phone use).</li>
-        <li>INT4 + sparsity → Raspberry Pi 5.</li>
-        <li>Active-learning loop for auto-label of false-positives.</li>
-      </ol>
+      <!-- numeric pagination -->
+      <div class="pager">
+        <!-- JS will build 20 numbered buttons -->
+      </div>
     </section>
   </main>
 
-  <script src="../script.js"></script>
+  <!-- lightweight slideshow JS -->
+  <script>
+    const slides   = document.querySelectorAll('.slide');
+    const prevBtn  = document.querySelector('.prev');
+    const nextBtn  = document.querySelector('.next');
+    const pagerBox = document.querySelector('.pager');
+    let cur = 0;
+
+    // build numeric pager
+    slides.forEach((_, i) => {
+      const num = document.createElement('button');
+      num.textContent = i + 1;
+      num.className = 'page-btn' + (i === 0 ? ' active' : '');
+      num.addEventListener('click', () => show(i));
+      pagerBox.appendChild(num);
+    });
+    const pageBtns = document.querySelectorAll('.page-btn');
+
+    function show(n){
+      slides[cur].classList.remove('showing');
+      pageBtns[cur].classList.remove('active');
+      cur = (n + slides.length) % slides.length;
+      slides[cur].classList.add('showing');
+      pageBtns[cur].classList.add('active');
+    }
+    prevBtn.onclick = () => show(cur - 1);
+    nextBtn.onclick = () => show(cur + 1);
+  </script>
 </body>
 </html>
