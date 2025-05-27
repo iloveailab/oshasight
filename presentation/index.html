@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="../oshasight-logo.jpg" type="image/jpg">
   <title>oshasight · Presentation</title>
 
-  <!-- global look-&-feel -->
+  <!-- global look-and-feel -->
   <link rel="stylesheet" href="../style.css">
-  <!-- local slideshow tweaks -->
+  <!-- slideshow tweaks -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- ───── NAVBAR (unchanged) ───── -->
+  <!-- NAVBAR -->
   <header class="top-bar">
     <div class="project-name"><a href="../">oshasight</a></div>
     <nav>
@@ -25,11 +26,10 @@
   </header>
 
   <main class="content">
-    <!-- ───── SLIDESHOW ───── -->
+    <!-- SLIDESHOW -->
     <section id="slideshow" class="section">
       <div class="slideshow-container">
-        <!-- 20 slides -->
-        <!-- You may replace the src paths with your actual images -->
+        <!-- images -->
         <img src="1.png"  alt="Slide 1"  class="slide showing">
         <img src="2.png"  alt="Slide 2"  class="slide">
         <img src="3.png"  alt="Slide 3"  class="slide">
@@ -51,19 +51,16 @@
         <img src="19.png" alt="Slide 19" class="slide">
         <img src="20.png" alt="Slide 20" class="slide">
 
-        <!-- navigation arrows -->
+        <!-- arrows -->
         <button class="nav-btn prev" aria-label="Previous slide">&#10094;</button>
         <button class="nav-btn next" aria-label="Next slide">&#10095;</button>
       </div>
 
-      <!-- numeric pagination -->
-      <div class="pager">
-        <!-- JS will build 20 numbered buttons -->
-      </div>
+      <!-- numeric pager -->
+      <div class="pager"></div>
     </section>
   </main>
 
-  <!-- lightweight slideshow JS -->
   <script>
     const slides   = document.querySelectorAll('.slide');
     const prevBtn  = document.querySelector('.prev');
@@ -71,13 +68,13 @@
     const pagerBox = document.querySelector('.pager');
     let cur = 0;
 
-    // build numeric pager
+    // build pager buttons
     slides.forEach((_, i) => {
-      const num = document.createElement('button');
-      num.textContent = i + 1;
-      num.className = 'page-btn' + (i === 0 ? ' active' : '');
-      num.addEventListener('click', () => show(i));
-      pagerBox.appendChild(num);
+      const b = document.createElement('button');
+      b.textContent = i + 1;
+      b.className   = 'page-btn' + (i === 0 ? ' active' : '');
+      b.addEventListener('click', () => show(i));
+      pagerBox.appendChild(b);
     });
     const pageBtns = document.querySelectorAll('.page-btn');
 
@@ -88,8 +85,15 @@
       slides[cur].classList.add('showing');
       pageBtns[cur].classList.add('active');
     }
+
     prevBtn.onclick = () => show(cur - 1);
     nextBtn.onclick = () => show(cur + 1);
+
+    // ▲▼ keyboard support
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); show(cur - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1); }
+    });
   </script>
 </body>
 </html>

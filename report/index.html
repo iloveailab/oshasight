@@ -1,100 +1,47 @@
-<!-- /report/index.html  ·  Detailed Report / White-Paper -->
+<!-- /report/index.html · Detailed Report / White-Paper -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>osha · Report</title>
-  <!-- shared styles -->
+    <link rel="icon" href="../oshasight-logo.jpg" type="image/jpg">
+  <title>OshaSight · Report</title>
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <!-- ───────── NAVBAR (shared) ───────── -->
+  <!-- NAVBAR -->
   <header class="top-bar">
-    <div class="project-name"><a href="../">osha</a></div>
+    <div class="project-name"><a href="../">OshaSight</a></div>
     <nav>
       <ul>
-        <li><a href="../index.html"          class="nav-link">Overview</a></li>
-        <li><a href="../presentation/index.html" class="nav-link">Presentation</a></li>
-        <li><a href="../setup/index.html"    class="nav-link">Setup&nbsp;/&nbsp;Installation</a></li>
-        <li><a href="./index.html"           class="nav-link active">Report</a></li>
+        <li><a href="../"                  class="nav-link">Overview</a></li>
+        <li><a href="../presentation/"     class="nav-link">Presentation</a></li>
+        <li><a href="../setup/"            class="nav-link">Setup</a></li>
+        <li><a href="./"                   class="nav-link active">Report</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="content">
-    <!-- COVER -->
-    <section id="cover" class="section hero-section">
-      <h1>OSHA Compliance Monitor — Technical Report</h1>
-      <p class="subtitle">Full white-paper and reproducibility docs (v1.0, May 2025)</p>
-      <a href="report.pdf" class="download-btn" download>Download&nbsp;PDF&nbsp;(2.1&nbsp;MB)</a>
-      <p style="margin-top:12px;font-size:0.9rem;color:var(--color-muted);">
-        Prefer reading inline? Scroll down to view the embedded PDF.
-      </p>
-    </section>
-
-    <!-- EXECUTIVE SUMMARY -->
-    <section id="summary" class="section">
-      <h2>Executive Summary</h2>
-      <p>
-        This white-paper details the design, experimentation and deployment of a
-        real-time personal-protective-equipment (PPE) compliance monitor. The
-        system combines distilled YOLOv8 detection with a lightweight rule
-        engine, achieving <strong>0.91 mAP@0.5</strong> and <strong>100 FPS</strong>
-        on commodity GPUs, or <strong>31 FPS</strong> on Jetson Orin Nano.
-      </p>
-      <p>
-        Beyond accuracy, we focus on <em>deployability</em> (≤ 5 W on edge
-        hardware) and <em>auditability</em> (signed violation logs for OSHA
-        inspectors). All code, weights and annotation tools are released under
-        Apache-2.0.
-      </p>
-    </section>
-
-    <!-- CONTENTS OVERVIEW -->
-    <section id="toc" class="section">
-      <h2>Report Contents</h2>
-      <ol>
-        <li>Problem statement &amp; scope</li>
-        <li>Data acquisition, labelling protocol &amp; QA</li>
-        <li>Model selection, training pipeline &amp; hyper-tuning</li>
-        <li>Edge deployment &amp; optimisation (pruning + INT8)</li>
-        <li>Evaluation: accuracy, latency, power draw</li>
-        <li>Ethical considerations &amp; privacy</li>
-        <li>Limitations &amp; future work</li>
-      </ol>
-    </section>
 
     <!-- INLINE PDF VIEWER -->
-    <section id="pdf" class="section">
-      <h2>Read Online</h2>
+    <section class="section">
       <iframe
-        src="report.pdf#page=1&zoom=100"
+        src="report.pdf#view=FitH"
         width="100%"
         height="800"
         style="border:1px solid var(--border-color); border-radius:6px;">
       </iframe>
-      <p style="text-align:center;margin-top:10px;">
-        <a href="report.pdf" download>Download the full PDF</a> if the embed
-        does not load in your browser.
-      </p>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section footer-section">
-      <h2>Citation &amp; Contact</h2>
-      <p>
-        Cite this work as:<br>
-        <code>Porcelli L., Ceylan G. (2025) OSHA Compliance Monitor v1.0.</code>
-      </p>
-      <p>
-        Questions or feedback? Email
-        <a href="mailto:safety@osha.ai">safety@osha.ai</a>.
-      </p>
+      <section class="section hero-section">
+      <h1>OshaSight — Technical Report</h1>
+      <p class="subtitle">White-paper &amp; reproducibility guide (v1.0, May 2025)</p>
+      <a href="report.pdf" class="download-btn" download>Download PDF (2.1 MB)</a>
     </section>
+
   </main>
 
-  <!-- shared script -->
   <script src="../script.js"></script>
 </body>
 </html>

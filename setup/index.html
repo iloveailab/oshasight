@@ -1,180 +1,162 @@
-<!-- /setup/index.html  ·  Setup / Installation for “oshasight” -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>oshasight · Setup / Installation</title>
-  <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="../oshasight-logo.jpg" type="image/jpg">
+  <title>OshaSight · Setup / Installation</title>
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
   <!-- NAVBAR -->
   <header class="top-bar">
-    <div class="project-name"><a href="../">oshasight</a></div>
+    <div class="project-name"><a href="../">OshaSight</a></div>
     <nav>
       <ul>
         <li><a href="../"              class="nav-link">Overview</a></li>
         <li><a href="../presentation/" class="nav-link">Presentation</a></li>
-        <li><a href="./"               class="nav-link active">Setup&nbsp;/&nbsp;Installation</a></li>
+        <li><a href="./"               class="nav-link active">Setup</a></li>
         <li><a href="../report/"       class="nav-link">Report</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="content">
-
-    <!-- 1 ▸ Quick-start -->
-    <section id="quick" class="section hero-section">
-      <h1>Quick-Start (Desktop GPU)</h1>
-      <p class="subtitle">Clone → install → download weights → run.</p>
-<pre class="code-block">
-git clone https://github.com/iloveailab/oshasight.git
-cd oshasight
-
-conda create -n oshasight python=3.12 -y
-conda activate oshasight
-
-pip install -r requirements.txt          # ultralytics 8.3.1, opencv-python, PySimpleGUI
-python scripts/download_weights.py       # ≈70 MB
-python osha.py                           # opens webcam demo
-</pre>
-      <p class="note">No GPU? add <code>--device cpu</code> — expect ~3 FPS.</p>
+    <!-- 1 ▸ Clone the repo -->
+    <section class="section hero-section">
+      <h1>1. Clone OshaSight (Windows for now)</h1>
+      <pre class="code-block">
+git clone https://github.com/iloveailab/oshasight-setup.git
+cd oshasight-setup
+      </pre>
     </section>
 
-    <!-- 2 ▸ Project structure -->
-    <section id="structure" class="section">
-      <h2>Project Structure</h2>
-<pre class="code-block">
-oshasight/
- ├─ osha.py                # ⇨ main multi-detector GUI
- ├─ train_mask.py          # ⇨ example training script (mask)
- ├─ runs/                  # ⇨ YOLO training outputs & weights
- ├─ datasets/              # ⇨ YOLO-format datasets
- ├─ scripts/
- │   ├─ download_weights.py
- │   └─ export_to_tensorrt.py
- └─ requirements.txt
-</pre>
-      <ul>
-        <li><strong>osha.py</strong> loads one detector per PPE class → live webcam overlays.</li>
-        <li><strong>train_*.py</strong> scripts build or fine-tune each detector.</li>
-        <li><strong>runs/&lt;class&gt;/weights/best.pt</strong> is what oshasight uses by default.</li>
-      </ul>
-    </section>
-
-    <!-- 3 ▸ How oshasight works -->
-    <section id="osha-py" class="section">
-      <h2>Inside <code>osha.py</code></h2>
-      <p>
-        Every frame is passed through each enabled YOLOv8 detector.  
-        Thresholds and colours are set in two dictionaries:
-      </p>
-<pre class="code-block">
-THRESHOLDS = {'Mask': 0.85, 'Smoke': 0.6, ...}
-COLORS     = {'Mask': (0,255,0), 'Glove': (255,0,255), ...}
-</pre>
-      <p>
-        <strong>Want to add a new class?</strong>
-      </p>
-      <ol>
-        <li>Train a detector → place <code>runs/newclass/weights/best.pt</code></li>
-        <li>Add to <code>MODELS</code> in <code>osha.py</code></li>
-        <li>Optionally append a line to <code>THRESHOLDS</code> / <code>COLORS</code></li>
-      </ol>
-    </section>
-
-    <!-- 4 ▸ Training example -->
-    <section id="train" class="section">
-      <h2>Training Your Own Model (Mask example)</h2>
-      <p>
-        The script below fine-tunes <code>yolov8s.pt</code> for face-mask detection on a YOLO-format dataset:
-      </p>
-<pre class="code-block">
-# ⇨ train_mask.py  (excerpt)
-from ultralytics import YOLO
-model = YOLO('yolov8s.pt')          # load pretrained backbone
-model.train(
-    data='datasets/mask/data.yaml', # dataset cfg
-    imgsz=640,
-    epochs=50,
-    batch=8,
-    cache=True,
-    patience=10,                    # early stop
-    project='runs',
-    name='mask'
-)
-</pre>
+    <!-- 2 ▸ Install dependencies & download YOLOv8 -->
+    <section class="section">
+      <h2>2. Install dependencies &amp; grab YOLOv8-s</h2>
+      <pre class="code-block">
+pip install -r requirements.txt
+      </pre>
       <p class="note">
-        After 50 epochs the best weights live at <code>runs/mask/weights/best.pt</code><br>
-        oshasight will auto-load them on next launch.
+        Installs <code>ultralytics</code>, <code>opencv-python</code>, <code>PySimpleGUI</code>, etc.
       </p>
-      <h3>Dataset YAML format</h3>
-<pre class="code-block">
-path: ../datasets/mask
-train: images/train
-val:   images/val
-test:  images/test
-names:
-  0: mask
-</pre>
+      <p>Now download the official YOLOv8-s checkpoint into the project root:</p>
+      <pre class="code-block">
+curl -L "https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8s.pt" -o yolov8s.pt
+
+      </pre>
+      <p class="note">
+        Windows users can run that in PowerShell, or simply download  
+        <a href="https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8s.pt" target="_blank">
+          yolov8s.pt
+        </a> and save it in this folder.
+      </p>
     </section>
 
-    <!-- 5 ▸ YOLOv8 cheatsheet -->
-    <section id="yolo8" class="section">
-      <h2>YOLOv8 in 45 Seconds</h2>
-      <ul>
-        <li>Versions: <code>n</code>/<code>s</code>/<code>m</code>/<code>l</code>/<code>x</code> → pick smallest that meets accuracy.</li>
-        <li>Command-line: <code>yolo detect train ...</code> identical to Python API.</li>
-        <li>Export: <code>model.export(format='onnx')</code> or <code>'engine'</code> for TensorRT.</li>
-        <li>Pruning &amp; distillation scripts provided in <code>scripts/model_tools/</code>.</li>
-      </ul>
+    <!-- 3 ▸ Create folder structure (Windows) -->
+    <section class="section">
+      <h2>3. Create data &amp; runs folders</h2>
+      <p>In Command Prompt:</p>
+      <pre class="code-block">
+mkdir datasets\mask
+mkdir datasets\vest
+mkdir datasets\helmet
+mkdir datasets\goggles
+mkdir datasets\gloves
+mkdir datasets\smoke
+
+mkdir runs
+      </pre>
+      <p class="note">
+        You can copy-paste each line, or use PowerShell loops if you prefer.
+      </p>
     </section>
 
-    <!-- 6 ▸ Datasets -->
-    <section id="datasets" class="section">
-      <h2>Datasets Used</h2>
+    <!-- 4 ▸ Download & prepare Mask -->
+    <section class="section">
+      <h2>4. Download &amp; convert Mask dataset</h2>
+      <p>Download the VOC ZIP and unpack into <code>datasets\mask\VOC\</code>:</p>
+      <pre class="code-block">
+# e.g. via Kaggle CLI or web download
+# unzip into datasets\mask\VOC
+      </pre>
+      <p>Convert VOC → YOLO:</p>
+      <pre class="code-block">
+python convert_voc_to_yolo.py
+      </pre>
+    </section>
+
+    <!-- 5 ▸ Download other datasets -->
+    <section class="section">
+      <h2>5. Download other datasets (YOLO format)</h2>
       <ul class="link-list">
-        <li><a href="https://universe.roboflow.com/noriel-vlmtq/glassesdetection-lwja6/dataset/2" target="_blank">GlassesDetection v2</a> — goggles</li>
-        <li><a href="https://universe.roboflow.com/sametataysamet/kask-tanima/dataset/3" target="_blank">Kask Tanıma v3</a> — hard-hat</li>
-        <li><a href="https://www.kaggle.com/datasets/andrewmvd/face-mask-detection" target="_blank">Face-Mask-Detection</a> — mask</li>
-        <li><a href="https://universe.roboflow.com/manoj-mava/moye-moye" target="_blank">Moye Moye PPE mix</a></li>
-        <li><a href="https://universe.roboflow.com/tello-8ckdt/hazard-vest/dataset/3" target="_blank">Hazard-Vest v3</a></li>
+        <li><strong>Vest:</strong>
+          <a href="https://universe.roboflow.com/tello-8ckdt/hazard-vest/dataset/3" target="_blank">
+            Hazard-Vest v3
+          </a>
+        </li>
+        <li><strong>Helmet:</strong>
+          <a href="https://universe.roboflow.com/sametataysamet/kask-tanima/dataset/3" target="_blank">
+            Kask Tanıma v3
+          </a>
+        </li>
+        <li><strong>Goggles:</strong>
+          <a href="https://universe.roboflow.com/noriel-vlmtq/glassesdetection-lwja6/dataset/2" target="_blank">
+            GlassesDetection v2
+          </a>
+        </li>
+        <li><strong>Gloves:</strong>
+          <a href="https://universe.roboflow.com/manoj-mava/moye-moye/dataset/1" target="_blank">
+            Moye Moye PPE Mix
+          </a>
+        </li>
+        <li><strong>Smoke:</strong>
+          <a href="https://universe.roboflow.com/deneme-yz/sigara-deneme/dataset/2" target="_blank">
+            Sigara-Deneme
+          </a>
+        </li>
       </ul>
-      <p>18 k partner-factory frames and 120 k Unity renders supplement public data.</p>
-    </section>
-
-    <!-- 7 ▸ Edge deployment -->
-    <section id="edge" class="section">
-      <h2>Edge Deployment (Jetson Orin Nano)</h2>
-<pre class="code-block">
-# Flash JetPack 6.0 (CUDA 12.2, cuDNN 9)
-sudo apt install python3-pip libopenblas-base
-pip install ultralytics==8.3.1 onnxruntime-gpu==1.17
-
-# Export TensorRT engine
-python scripts/export_to_tensorrt.py \
-  --model runs/helmet/weights/best.pt
-
-# Run
-python osha.py --device 0 --weights build/helmet.engine
-</pre>
-      <p class="note">Expect ≈31 FPS · power ≈4.7 W.</p>
-    </section>
-
-    <!-- 8 ▸ Troubleshooting -->
-    <section id="trouble" class="section footer-section">
-      <h2>FAQ &amp; Troubleshooting</h2>
-      <ul>
-        <li><strong>CUDA mismatch:</strong> reinstall torch wheel matching your driver.</li>
-        <li><strong>No webcam:</strong> pass <code>--source test.mp4</code> to <code>osha.py</code>.</li>
-        <li><strong>Low glove recall:</strong> ensure lighting &gt; 200 lux — gloves are darkest.</li>
-        <li><strong>GUI freeze on Windows:</strong> run <code>python osha.py --nothreads</code>.</li>
-      </ul>
-      <p style="margin-top:14px;">Still stuck? open an issue or email
-        <a href="mailto:safety@osha.ai">safety@osha.ai</a>.
+      <p class="note">
+        Unzip each archive into its <code>datasets\<class>\</code> folder.
       </p>
     </section>
 
+    <!-- 6 ▸ Train Mask detector -->
+    <section class="section">
+      <h2>6. Train Mask detector</h2>
+      <pre class="code-block">
+python train_mask.py
+      </pre>
+      <p class="note">
+        Outputs → <code>runs\mask\weights\best.pt</code>
+      </p>
+    </section>
+
+    <!-- 7 ▸ Train remaining detectors -->
+    <section class="section">
+      <h2>7. Train other detectors</h2>
+      <pre class="code-block">
+python train_vest.py
+python train_helmet.py
+python train_goggles.py
+python train_gloves.py
+python train_smoke.py
+      </pre>
+      <p class="note">
+        Each writes to <code>runs\<class>\weights\best.pt</code>.
+      </p>
+    </section>
+
+    <!-- 8 ▸ Launch the live GUI -->
+    <section class="section">
+      <h2>8. Launch the demo GUI</h2>
+      <pre class="code-block">
+python osha.py
+      </pre>
+      <p class="note">
+        By default it auto-loads every <code>best.pt</code> under <code>runs\<class>\weights\</code>.
+      </p>
+    </section>
   </main>
 
   <script src="../script.js"></script>
