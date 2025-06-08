@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="../oshasight-logo.jpg" type="image/jpg">
+  <title>oshasight · Presentation</title>
+
+  <!-- global look-and-feel -->
+  <link rel="stylesheet" href="../style.css">
+  <!-- slideshow tweaks -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="top-bar">
+    <div class="project-name"><a href="../">oshasight</a></div>
+    <nav>
+      <ul>
+        <li><a href="../"              class="nav-link">Overview</a></li>
+        <li><a href="./"               class="nav-link active">Presentation</a></li>
+        <li><a href="../setup/"        class="nav-link">Setup&nbsp;/&nbsp;Installation</a></li>
+        <li><a href="../report/"       class="nav-link">Report</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="content">
+    <!-- SLIDESHOW -->
+    <section id="slideshow" class="section">
+      <div class="slideshow-container">
+        <!-- images -->
+        <img src="1.png"  alt="Slide 1"  class="slide showing">
+        <img src="2.png"  alt="Slide 2"  class="slide">
+        <img src="3.png"  alt="Slide 3"  class="slide">
+        <img src="4.png"  alt="Slide 4"  class="slide">
+        <img src="5.png"  alt="Slide 5"  class="slide">
+        <img src="6.png"  alt="Slide 6"  class="slide">
+        <img src="7.png"  alt="Slide 7"  class="slide">
+        <img src="8.png"  alt="Slide 8"  class="slide">
+        <img src="9.png"  alt="Slide 9"  class="slide">
+        <img src="10.png" alt="Slide 10" class="slide">
+        <img src="11.png" alt="Slide 11" class="slide">
+        <img src="12.png" alt="Slide 12" class="slide">
+        <img src="13.png" alt="Slide 13" class="slide">
+        <img src="14.png" alt="Slide 14" class="slide">
+        <img src="15.png" alt="Slide 15" class="slide">
+        <img src="16.png" alt="Slide 16" class="slide">
+        <img src="17.png" alt="Slide 17" class="slide">
+        <img src="18.png" alt="Slide 18" class="slide">
+        <img src="19.png" alt="Slide 19" class="slide">
+        <img src="20.png" alt="Slide 20" class="slide">
+		<img src="21.png" alt="Slide 21" class="slide">
+        <img src="22.png" alt="Slide 22" class="slide">
+        <img src="23.png" alt="Slide 23" class="slide">
+        <img src="24.png" alt="Slide 24" class="slide">
+		<img src="25.png" alt="Slide 25" class="slide">
+
+        <!-- arrows -->
+        <button class="nav-btn prev" aria-label="Previous slide">&#10094;</button>
+        <button class="nav-btn next" aria-label="Next slide">&#10095;</button>
+      </div>
+
+      <!-- numeric pager -->
+      <div class="pager"></div>
+    </section>
+  </main>
+
+  <script>
+    const slides   = document.querySelectorAll('.slide');
+    const prevBtn  = document.querySelector('.prev');
+    const nextBtn  = document.querySelector('.next');
+    const pagerBox = document.querySelector('.pager');
+    let cur = 0;
+
+    // build pager buttons
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.textContent = i + 1;
+      b.className   = 'page-btn' + (i === 0 ? ' active' : '');
+      b.addEventListener('click', () => show(i));
+      pagerBox.appendChild(b);
+    });
+    const pageBtns = document.querySelectorAll('.page-btn');
+
+    function show(n){
+      slides[cur].classList.remove('showing');
+      pageBtns[cur].classList.remove('active');
+      cur = (n + slides.length) % slides.length;
+      slides[cur].classList.add('showing');
+      pageBtns[cur].classList.add('active');
+    }
+
+    prevBtn.onclick = () => show(cur - 1);
+    nextBtn.onclick = () => show(cur + 1);
+
+    // ▲▼ keyboard support
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); show(cur - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1); }
+    });
+  </script>
+</body>
+</html>

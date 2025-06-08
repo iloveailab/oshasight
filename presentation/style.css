@@ -1,0 +1,63 @@
+/* Only slideshow-specific tweaks.
+   The global look comes from ../style.css */
+
+/* slideshow container */
+.slideshow-container {
+  position: relative;
+  max-width: 1300px;        /* was 900px — widen by ~20% */
+  /* OR: max-width: 85vw;   /* fills 85 % of viewport width */
+  margin: 0 auto;
+}
+
+
+.slide {
+  display: none;
+  width: 100%;
+  border-radius: 6px;
+}
+
+/* first slide visible by default (class added in HTML) */
+.slide.showing { display: block; }
+
+/* arrows */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 38px;
+  text-align: center;
+}
+.nav-btn:hover { background: rgba(0,0,0,0.6); }
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* numeric pager */
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 18px;
+}
+.page-btn {
+  padding: 4px 9px;
+  font-size: 0.85rem;
+  background: var(--color-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.page-btn.active,
+.page-btn:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}

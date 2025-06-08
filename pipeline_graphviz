@@ -1,0 +1,33 @@
+digraph {
+	graph [nodesep=0.6 pad=0.3 rankdir=LR splines=ortho]
+	node [color="#333333" fillcolor="#f7f7f7" fontname=Helvetica fontsize=10 margin="0.2,0.1" shape=box style="filled,rounded"]
+	step0 [label="Data Capture"]
+	step1 [label="Validation &
+Exploration"]
+	step2 [label="Wrangling
+(Cleaning)"]
+	step3 [label="Versioning
+(Git/DVC)"]
+	step4 [label="Train &
+Test"]
+	step5 [label="Model
+Engineering"]
+	step6 [label="Evaluation
+(mAP/FPS)"]
+	step7 [label="Packaging
+(ONNX/TensorRT)"]
+	step8 [label="Deployment
+(PySimpleGUI)"]
+	step0 -> step1 [arrowhead=vee color="#666666"]
+	step1 -> step2 [arrowhead=vee color="#666666"]
+	step2 -> step3 [arrowhead=vee color="#666666"]
+	step3 -> step4 [arrowhead=vee color="#666666"]
+	step4 -> step5 [arrowhead=vee color="#666666"]
+	step5 -> step6 [arrowhead=vee color="#666666"]
+	step6 -> step7 [arrowhead=vee color="#666666"]
+	step7 -> step8 [arrowhead=vee color="#666666"]
+	monitor [label="Monitoring
+& Logging" color="#007acc" fillcolor="#e0f3ff"]
+	monitor -> step2 [arrowhead=vee color="#007acc" style=dashed]
+	step6 -> monitor [arrowhead=vee color="#007acc" style=dashed]
+}

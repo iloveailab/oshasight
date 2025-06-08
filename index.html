@@ -1,0 +1,103 @@
+<!-- /index.html · Overview for “OshaSight” -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="./oshasight-logo.jpg" type="image/jpg">
+  <title>OshaSight · Overview</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="top-bar">
+    <div class="project-name"><a href="./">OshaSight</a></div>
+    <nav>
+      <ul>
+        <li><a href="./"                class="nav-link active">Overview</a></li>
+        <li><a href="./presentation/"   class="nav-link">Presentation</a></li>
+        <li><a href="./setup/"          class="nav-link">Setup / Installation</a></li>
+        <li><a href="./report/"         class="nav-link">Report</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+    <!-- HERO -->
+    <section id="hero" class="top-header">
+      <h1>OshaSight</h1>
+      <p>
+        A live, always-on PPE &amp; smoke monitor built with YOLOv8.  
+        Detects mask, gloves, helmet, goggles, hi-viz vest and smoking  
+        in real time (<50 ms/frame).
+      </p>
+      <a href="./presentation/" class="download-btn">View Demo Slides</a>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <h2>Key Features</h2>
+      <ul>
+        <li>Six independent YOLOv8 detectors—one per class (Mask, Gloves, Helmet, Goggles, Vest, Smoke)</li>
+        <li>Real-time overlays &amp; alerts via a PySimpleGUI dashboard</li>
+        <li>100 FPS on GTX 1660 Ti or 31 FPS on Jetson Orin Nano (≈ 5 W)</li>
+        <li>Signed CSV log for OSHA-style audits + optional audio/visual alarms</li>
+        <li>Fully open-source: VOC→YOLO converter + train_*.py scripts</li>
+        <li><a href="./setup/">See Setup</a> for training, weights download and Edge deployment</li>
+      </ul>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About OshaSight</h2>
+      <p>
+        Developed for Sapienza’s “Computer Vision &amp; NLP” lab (Spring 2025).  
+        We converted public datasets into YOLO format, trained each class  
+        on ultralytics’ YOLOv8-s or -n backbones (50 epochs, batch 8, imgsz 640),  
+        then distilled our best model for edge deployment.
+      </p>
+
+      <h3>Datasets &amp; Links</h3>
+      <ul class="link-list">
+        <li><a href="https://www.kaggle.com/datasets/andrewmvd/face-mask-detection" target="_blank" rel="noopener">Mask (Kaggle Face-Mask-Detection)</a></li>
+        <li><a href="https://universe.roboflow.com/tello-8ckdt/hazard-vest/dataset/3" target="_blank" rel="noopener">Vest (Hazard-Vest v3)</a></li>
+        <li><a href="https://universe.roboflow.com/sametataysamet/kask-tanima/dataset/3" target="_blank" rel="noopener">Helmet (Kask Tanıma v3)</a></li>
+        <li><a href="https://universe.roboflow.com/deneme-yz/sigara-deneme/dataset/2" target="_blank" rel="noopener">Smoke (Custom Sigara-Deneme)</a></li>
+        <li><a href="https://universe.roboflow.com/noriel-vlmtq/glassesdetection-lwja6/dataset/2" target="_blank" rel="noopener">Goggles (GlassesDetection v2)</a></li>
+        <li><a href="https://universe.roboflow.com/manoj-mava/moye-moye/dataset/1" target="_blank" rel="noopener">Gloves (Moye Moye PPE Mix)</a></li>
+      </ul>
+
+      <figure>
+        <img src="osha.png" alt="OshaSight live monitor UI screenshot">
+        <figcaption>
+          Capture → multi-class YOLOv8 → rule engine → alerts &amp; logs
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team">
+      <h2>Our Team</h2>
+      <div class="team-grid">
+        <figure>
+          <img src="lore.png" alt="Photo of Lorenzo Porcelli">
+          <figcaption>
+            Lorenzo Porcelli<br>
+            <small><a href="mailto:porcelli.2126674@studenti.uniroma1.it">porcelli.2126674@studenti.uniroma1.it</a></small>
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="gokhan.jpeg" alt="Photo of Gökhan Ceylan">
+          <figcaption>
+            Gökhan Ceylan<br>
+            <small><a href="mailto:ceylan.2124426@studenti.uniroma1.it">ceylan.2124426@studenti.uniroma1.it</a></small>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

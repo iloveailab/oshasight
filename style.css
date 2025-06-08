@@ -1,0 +1,193 @@
+/* style.css (unchanged) */
+:root {
+  --font-main: 'Roboto', sans-serif;
+  --color-bg: #fafafa;
+  --color-text: #222;
+  --color-muted: #555;
+  --color-accent: #007BFF;
+  --border-color: #ddd;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font-main);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+
+.top-bar {
+  width: 100%;
+  padding: 16px 32px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid var(--border-color);
+  z-index: 100;
+}
+
+.project-name a {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.top-bar nav { margin: 0 auto; }
+.top-bar nav ul {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+.top-bar nav a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Active link (current page) */
+.top-bar nav a.active {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Hover on any link, including active */
+.top-bar nav a:hover {
+  background: #0056cc; /* darker blue on hover */
+  color: #fff;
+}
+
+.content {
+  max-width: 900px;
+  margin: 80px auto 100px;
+  padding: 0 20px;
+}
+
+.top-header {
+  text-align: center;
+  padding: 80px 20px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 60px;
+}
+
+.top-header h1 {
+  font-size: 2.6rem;
+  margin-bottom: 16px;
+}
+.top-header p {
+  font-size: 1.05rem;
+  color: var(--color-muted);
+  margin-bottom: 24px;
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+.download-btn {
+  background: var(--color-accent);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.download-btn:hover { background: #005fcc; }
+
+section {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 60px;
+}
+section h2 {
+  font-size: 1.7rem;
+  margin-bottom: 16px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-color);
+}
+section p { font-size: 1rem; color: var(--color-muted); margin-bottom: 16px; }
+section ul {
+  list-style: disc inside;
+  margin-left: 20px;
+}
+section li { margin-bottom: 8px; }
+
+figure { margin-top: 20px; text-align: center; }
+figure img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+figure figcaption {
+  margin-top: 8px;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: 20px;
+}
+.team-grid figure { text-align: center; }
+.team-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+.team-grid figcaption { margin-top: 8px; }
+
+/* ───── Root palette & base (unchanged) ───── */
+:root {
+  --font-main: 'Roboto', sans-serif;
+  --color-bg: #fafafa;
+  --color-text: #222;
+  --color-muted: #555;
+  --color-accent: #007BFF;
+  --border-color: #ddd;
+  --color-code-bg: #f1f1f1;
+}
+
+/* base reset + body… unchanged */
+
+/* ───── NEW helper classes ───── */
+.note {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* ───── Code blocks (polished) ───── */
+.code-block {
+  background: var(--color-code-bg);
+  padding: 14px 18px;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.9rem;
+  overflow-x: auto;
+}
+
+/* ───── Link list in datasets ───── */
+.link-list li { margin-bottom: 6px; }
+.link-list a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+.link-list a:hover { text-decoration: underline; }
+
+/* everything else (navbar, tables, sections…) remains as in previous style.css */
+
+
+@media (max-width: 600px) {
+  .top-bar { flex-direction: column; gap: 12px; }
+  .content, section { padding: 20px; }
+}

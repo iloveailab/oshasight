@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="../oshasight-logo.jpg" type="image/jpg">
+  <title>OshaSight · Setup / Installation</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="top-bar">
+    <div class="project-name"><a href="../">OshaSight</a></div>
+    <nav>
+      <ul>
+        <li><a href="../"              class="nav-link">Overview</a></li>
+        <li><a href="../presentation/" class="nav-link">Presentation</a></li>
+        <li><a href="./"               class="nav-link active">Setup</a></li>
+        <li><a href="../report/"       class="nav-link">Report</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="content">
+    <!-- 1 ▸ Clone the repo -->
+    <section class="section hero-section">
+      <h1>1. Clone OshaSight (Windows for now)</h1>
+      <pre class="code-block">
+git clone https://github.com/iloveailab/oshasight-setup.git
+cd oshasight-setup
+      </pre>
+    </section>
+
+    <!-- 2 ▸ Install dependencies & download YOLOv8 -->
+    <section class="section">
+      <h2>2. Install dependencies &amp; grab YOLOv8-s</h2>
+      <pre class="code-block">
+pip install -r requirements.txt
+      </pre>
+      <p class="note">
+        Installs <code>ultralytics</code>, <code>opencv-python</code>, <code>PySimpleGUI</code>, etc.
+      </p>
+      <p>Now download the official YOLOv8-s checkpoint into the project root:</p>
+      <pre class="code-block">
+curl -L "https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8s.pt" -o yolov8s.pt
+
+      </pre>
+      <p class="note">
+        Windows users can run that in PowerShell, or simply download  
+        <a href="https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8s.pt" target="_blank">
+          yolov8s.pt
+        </a> and save it in this folder.
+      </p>
+    </section>
+
+    <!-- 3 ▸ Create folder structure (Windows) -->
+    <section class="section">
+      <h2>3. Create data &amp; runs folders</h2>
+      <p>In Command Prompt:</p>
+      <pre class="code-block">
+mkdir datasets\mask
+mkdir datasets\vest
+mkdir datasets\helmet
+mkdir datasets\goggles
+mkdir datasets\gloves
+mkdir datasets\smoke
+
+mkdir runs
+      </pre>
+      <p class="note">
+        You can copy-paste each line, or use PowerShell loops if you prefer.
+      </p>
+    </section>
+
+    <!-- 4 ▸ Download & prepare Mask -->
+    <section class="section">
+      <h2>4. Download &amp; convert Mask dataset</h2>
+      <p>Download the VOC ZIP and unpack into <code>datasets\mask\VOC\</code>:</p>
+      <pre class="code-block">
+# e.g. via Kaggle CLI or web download
+# unzip into datasets\mask\VOC
+      </pre>
+      <p>Convert VOC → YOLO:</p>
+      <pre class="code-block">
+python convert_voc_to_yolo.py
+      </pre>
+    </section>
+
+    <!-- 5 ▸ Download other datasets -->
+    <section class="section">
+      <h2>5. Download other datasets (YOLO format)</h2>
+      <ul class="link-list">
+        <li><strong>Vest:</strong>
+          <a href="https://universe.roboflow.com/tello-8ckdt/hazard-vest/dataset/3" target="_blank">
+            Hazard-Vest v3
+          </a>
+        </li>
+        <li><strong>Helmet:</strong>
+          <a href="https://universe.roboflow.com/sametataysamet/kask-tanima/dataset/3" target="_blank">
+            Kask Tanıma v3
+          </a>
+        </li>
+        <li><strong>Goggles:</strong>
+          <a href="https://universe.roboflow.com/noriel-vlmtq/glassesdetection-lwja6/dataset/2" target="_blank">
+            GlassesDetection v2
+          </a>
+        </li>
+        <li><strong>Gloves:</strong>
+          <a href="https://universe.roboflow.com/manoj-mava/moye-moye/dataset/1" target="_blank">
+            Moye Moye PPE Mix
+          </a>
+        </li>
+        <li><strong>Smoke:</strong>
+          <a href="https://universe.roboflow.com/deneme-yz/sigara-deneme/dataset/2" target="_blank">
+            Sigara-Deneme
+          </a>
+        </li>
+      </ul>
+      <p class="note">
+        Unzip each archive into its <code>datasets\<class>\</code> folder.
+      </p>
+    </section>
+
+    <!-- 6 ▸ Train Mask detector -->
+    <section class="section">
+      <h2>6. Train Mask detector</h2>
+      <pre class="code-block">
+python train_mask.py
+      </pre>
+      <p class="note">
+        Outputs → <code>runs\mask\weights\best.pt</code>
+      </p>
+    </section>
+
+    <!-- 7 ▸ Train remaining detectors -->
+    <section class="section">
+      <h2>7. Train other detectors</h2>
+      <pre class="code-block">
+python train_vest.py
+python train_helmet.py
+python train_goggles.py
+python train_gloves.py
+python train_smoke.py
+      </pre>
+      <p class="note">
+        Each writes to <code>runs\<class>\weights\best.pt</code>.
+      </p>
+    </section>
+
+    <!-- 8 ▸ Launch the live GUI -->
+    <section class="section">
+      <h2>8. Launch the demo GUI</h2>
+      <pre class="code-block">
+python osha.py
+      </pre>
+      <p class="note">
+        By default it auto-loads every <code>best.pt</code> under <code>runs\<class>\weights\</code>.
+      </p>
+    </section>
+  </main>
+
+  <script src="../script.js"></script>
+</body>
+</html>
